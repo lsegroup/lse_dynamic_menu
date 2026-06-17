@@ -1,0 +1,134 @@
+
+.s_lse_dynamic_menu {
+    .lse-dynamic-nav {
+
+        // ── Scroll container ──────────────────────────────────────────────────
+        .lse-scroll-outer {
+            position: relative;
+
+            // Top + bottom fade-shadow overlays.
+            // Colour is driven by --lse-fade-color (set via JS from sidebar).
+            // Default is white, matching the most common section background.
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                height: 28px;
+                pointer-events: none;
+                z-index: 2;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+
+            &::before {
+                top: 0;
+                background: linear-gradient(to bottom, var(--lse-fade-color, rgba(255, 255, 255, 0.92)), transparent);
+            }
+
+            &::after {
+                bottom: 0;
+                background: linear-gradient(to top, var(--lse-fade-color, rgba(255, 255, 255, 0.92)), transparent);
+            }
+
+            &.lse-scrolled::before  { opacity: 1; }
+            &.lse-scroll-more::after { opacity: 1; }
+        }
+
+        // ── Menu list (the scrollable element) ────────────────────────────────
+        .lse-menu-list {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+            // height set via JS; font-size/weight driven by CSS variables
+            font-size: var(--lse-font-size, inherit);
+            font-weight: var(--lse-font-weight, inherit);
+
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+
+            &::-webkit-scrollbar { width: 4px; }
+            &::-webkit-scrollbar-thumb {
+                background: rgba(0, 0, 0, 0.18);
+                border-radius: 2px;
+            }
+
+            // ── Top-level items ───────────────────────────────────────────────
+            > .nav-item {
+                position: relative;
+
+                > .nav-link {
+                    display: block;
+                    padding: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    color: var(--lse-link-color, inherit);
+                    text-decoration: none;
+                    transition: color 0.15s ease, background-color 0.15s ease;
+
+                    &:hover {
+                        color: var(--lse-link-hover-color, var(--link-color, #0d6efd));
+                        background-color: rgba(0, 0, 0, 0.04);
+                    }
+                }
+
+                > .nav-link.dropdown-toggle::after {
+                    margin-left: 0.4em;
+                }
+
+                // ── Sub-menu (flies out to the right) ─────────────────────────
+                &.dropdown {
+                    .dropdown-menu {
+                        display: none;
+                        position: absolute;
+                        top: 0;
+                        left: 100%;
+                        z-index: 1000;
+                        min-width: 200px;
+                        background-color: #fff;
+                        border: 1px solid rgba(0, 0, 0, 0.1);
+                        border-radius: 4px;
+                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+                        padding: 8px 0;
+                        list-style: none;
+
+                        .dropdown-item {
+                            display: block;
+                            padding: 0.4rem 1.25rem;
+                            white-space: nowrap;
+                            color: inherit;
+                            text-decoration: none;
+                            transition: background-color 0.1s ease;
+
+                            &:hover,
+                            &:focus {
+                                background-color: rgba(0, 0, 0, 0.05);
+                                color: var(--link-color, #0d6efd);
+                            }
+                        }
+                    }
+
+                    &:hover > .dropdown-menu { display: block; }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 991.98px) {
+        .lse-dynamic-nav .lse-menu-list {
+            .nav-item.dropdown .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                border: none;
+                padding-left: 1rem;
+                left: auto;
+                top: auto;
+            }
+        }
+    }
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <!-- ============================================================
+         1. SNIPPET TEMPLATE
+         The draggable block that gets inserted into the page.
+    ============================================================ -->
+    <template id="s_lse_dynamic_menu" name="Dynamic Menu">
+        <div class="s_lse_dynamic_menu o_snippet_drop_in_only"
+             data-snippet="s_lse_dynamic_menu"
+             data-url-path="/services"
+             data-lse-menu-height="100"
+             data-name="Dynamic Menu">
+            <nav class="lse-dynamic-nav o_not_editable">
+                <div class="lse-scroll-outer">
+                    <ul class="lse-menu-list">
+                        <li class="lse-menu-placeholder nav-item">
+                            <span class="nav-link text-muted fst-italic">
+                                Dynamic menu — loading...
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </template>
+
+    <!-- ============================================================
+         2. REGISTER IN EDITOR PANEL — Inner Content
+    ============================================================ -->
+    <template id="snippets_lse_dynamic_menu"
+              inherit_id="website.snippets"
+              name="Dynamic Menu Snippet">
+        <xpath expr="//snippets[@id='snippet_content']" position="inside">
+            <t t-snippet="lse_dynamic_menu.s_lse_dynamic_menu"
+               string="Dynamic Menu"
+               t-thumbnail="/lse_dynamic_menu/static/description/s_lse_dynamic_menu.png"
+               t-grid-column-span="12">
+                <keywords>menu navigation dynamic dropdown lse</keywords>
+            </t>
+        </xpath>
+    </template>
+
+</data>
+</odoo>

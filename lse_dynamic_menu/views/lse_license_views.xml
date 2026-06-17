@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="lse_license_view_list" model="ir.ui.view">
+        <field name="name">lse.license.list</field>
+        <field name="model">lse.license</field>
+        <field name="arch" type="xml">
+            <list string="LSE Licenses" editable="bottom">
+                <field name="name" readonly="1" string="Product"/>
+                <field name="key" placeholder="LSE-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" string="License Key"/>
+                <field name="status" readonly="1" widget="badge"
+                       decoration-success="status == 'valid'"
+                       decoration-warning="status == 'grace' or status == 'unchecked'"
+                       decoration-danger="status == 'invalid'"/>
+                <field name="expires" readonly="1"/>
+                <field name="last_checked" readonly="1" string="Last Checked"/>
+                <field name="message" readonly="1" optional="show"/>
+                <button name="action_check" type="object" icon="fa-refresh" title="Validate now"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="lse_license_view_form" model="ir.ui.view">
+        <field name="name">lse.license.form</field>
+        <field name="model">lse.license</field>
+        <field name="arch" type="xml">
+            <form string="LSE License">
+                <sheet>
+                    <group>
+                        <group string="Product">
+                            <field name="name" readonly="1"/>
+                            <field name="slug" readonly="1"/>
+                            <field name="status" readonly="1" widget="badge"
+                                   decoration-success="status == 'valid'"
+                                   decoration-warning="status == 'grace' or status == 'unchecked'"
+                                   decoration-danger="status == 'invalid'"/>
+                            <field name="expires" readonly="1"/>
+                            <field name="last_checked" readonly="1"/>
+                        </group>
+                        <group string="License">
+                            <field name="key" placeholder="LSE-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"/>
+                            <field name="message" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_check" type="object"
+                            string="Validate Now" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lse_license_list" model="ir.actions.act_window">
+        <field name="name">LSE Licenses</field>
+        <field name="res_model">lse.license</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

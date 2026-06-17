@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <!--
+        No snippet options registered here.
+        The option panel is injected entirely via vanilla JS in options.js
+        and does not use Odoo's Owl-based option component system.
+    -->
+
+</templates>

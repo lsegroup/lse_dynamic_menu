@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form_inherit_lse_license"
+                model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.lse_license</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app string="LSE Licenses" name="lse_dynamic_menu" groups="base.group_system">
+
+                        <block title="LSE Licenses" name="lse_license_block">
+
+                            <setting string="Installed LSE Products"
+                                     help="Enter license keys for all installed LSE Group addons">
+                                <field name="lse_license_summary" readonly="1"/>
+                                <div class="mt8">
+                                    <button name="action_open_lse_licenses"
+                                            type="object"
+                                            string="Manage Licenses"
+                                            class="btn-primary me-2"/>
+                                    <button name="action_check_all_licenses"
+                                            type="object"
+                                            string="Re-check All"
+                                            class="btn-secondary"/>
+                                </div>
+                            </setting>
+
+                        </block>
+
+                    </app>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
